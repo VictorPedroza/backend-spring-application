@@ -1,10 +1,11 @@
 package com.worldcup.backend.shared.entities;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,6 +14,7 @@ public class User implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "USER_ID")
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -21,8 +23,20 @@ public class User implements java.io.Serializable {
     @Column(nullable = false)
     private String password;
 
-    // Getters & Setters
+    @Column(nullable = true)
+    private Double points = 100.00;
 
+    // Constructor 
+    public User() {}
+
+    @PrePersist
+    protected void onCreate() {
+        if(this.points == null) {
+            this.points = 100.00;
+        }
+    }
+
+    // Getters & Setters
     public Long getId() { return id;}
     public void setId(Long id) { this.id = id;}
 
