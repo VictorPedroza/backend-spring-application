@@ -34,6 +34,9 @@ public class User implements java.io.Serializable {
         if(this.points == null) {
             this.points = 100.00;
         }
+        if(this.username != null) {
+            this.username = this.username.trim().toLowerCase();
+        }
     }
 
     // Getters & Setters
@@ -45,5 +48,8 @@ public class User implements java.io.Serializable {
 
     public String getPassword() { return password;}
     public void setPassword(String password) { this.password = password;}
+
+    public Double getPoints() { return points; }
+    public void setPoints(Double points) { this.points = points; }
     
 }
